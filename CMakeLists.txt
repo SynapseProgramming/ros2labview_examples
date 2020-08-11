@@ -29,10 +29,15 @@ ament_target_dependencies(sub_int32 rclcpp std_msgs)
 add_executable(pub_int32 src/pub_int32.cpp)
 ament_target_dependencies(pub_int32 rclcpp std_msgs)
 
+add_executable(add_int src/add_int.cpp)
+ament_target_dependencies(add_int rclcpp std_msgs)
+
+
 #key in name here, for ro2 to find the executable
 install(TARGETS
   sub_int32
   pub_int32
+  add_int
   DESTINATION lib/${PROJECT_NAME})
 
 
