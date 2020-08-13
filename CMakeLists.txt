@@ -27,6 +27,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Myint.msg"
+  "msg/Clusterdemo.msg"
  )
 
 
@@ -48,8 +49,17 @@ ament_target_dependencies(pub_custom_int rclcpp std_msgs ros2labview_examples)
 add_executable(sub_custom_int src/sub_custom_int.cpp)
 ament_target_dependencies(sub_custom_int rclcpp std_msgs ros2labview_examples)
 
+add_executable(sub_cluster src/sub_cluster.cpp)
+ament_target_dependencies(sub_cluster rclcpp std_msgs ros2labview_examples)
+
+add_executable(pub_cluster src/pub_cluster.cpp)
+ament_target_dependencies(pub_cluster rclcpp std_msgs ros2labview_examples)
+
+
 #key in name here, for ro2 to find the executable
 install(TARGETS
+  pub_cluster 
+  sub_cluster
   sub_int32
   pub_int32
   add_int
