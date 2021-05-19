@@ -3,13 +3,15 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/int32.hpp"
 
+#define be RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT
 
 class PubSub : public rclcpp::Node
 {
 public:
 
   PubSub()
-  : Node("ros_addint")
+  : Node("ros_addint"),
+    best_effort(rclcpp::KeepLast(10))
   {
     auto int_callback= [this](const std_msgs::msg::Int32::SharedPtr msg){
       auto to_add=std_msgs::msg::Int32();
@@ -20,7 +22,7 @@ public:
     };
 
     publisher_ = this->create_publisher<std_msgs::msg::Int32>("result", 10);
-    subscription_ = this->create_subscription<std_msgs::msg::Int32>("toadd", 10,int_callback);
+    subscription_ = this->create_subscription<std_msgs::msg::Int32>("toadd",best_effort.reliability(be),int_callback);
 
   }
 
@@ -29,6 +31,8 @@ private:
   //shared ptr of a timer
   rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
   rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr subscription_;
+
+  rclcpp::QoS best_effort;
 };
 
 int main(int argc, char * argv[])
