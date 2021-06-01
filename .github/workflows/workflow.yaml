@@ -13,14 +13,14 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         ros_distribution:
-          -foxy
+          - foxy
       fail-fast: false
     steps:
     - name: Setup ROS 2
       uses: ros-tooling/setup-ros@v0.2
     #with:
   #      required-ros-distributions: ${{ matrix.ros_distribution }}
-    
+
     - name: Run Tests
       uses: ros-tooling/action-ros-ci@v0.2
       with:
