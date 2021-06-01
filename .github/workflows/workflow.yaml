@@ -3,8 +3,7 @@ name: test file
 on:
   pull_request:
   push:
-    branches:
-      - devel
+  
 
 jobs:
   build-and-test:
