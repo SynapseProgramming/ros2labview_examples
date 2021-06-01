@@ -25,7 +25,6 @@ public:
     subscription_ = this->create_subscription<std_msgs::msg::Int32>("toadd",best_effort.reliability(be),int_callback);
 
   }
-HEHE THIS IS MADE TO CRASH THE PROGRAM
 private:
 
   //shared ptr of a timer
