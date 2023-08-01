@@ -31,7 +31,9 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Intarray.msg"
  )
 
-
+# link against interface
+rosidl_get_typesupport_target(cpp_typesupport_target
+  ${PROJECT_NAME} rosidl_typesupport_cpp)
 
 
 
@@ -47,27 +49,28 @@ ament_target_dependencies(add_int rclcpp std_msgs)
 
 add_executable(pub_custom_int src/pub_custom_int.cpp)
 ament_target_dependencies(pub_custom_int rclcpp std_msgs )
-rosidl_target_interfaces(pub_custom_int ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(pub_custom_int "${cpp_typesupport_target}")
 
 add_executable(sub_custom_int src/sub_custom_int.cpp)
 ament_target_dependencies(sub_custom_int rclcpp std_msgs )
-rosidl_target_interfaces(sub_custom_int ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(sub_custom_int "${cpp_typesupport_target}")
+
 
 add_executable(sub_cluster src/sub_cluster.cpp)
 ament_target_dependencies(sub_cluster rclcpp std_msgs )
-rosidl_target_interfaces(sub_cluster ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(sub_cluster "${cpp_typesupport_target}")
 
 add_executable(pub_cluster src/pub_cluster.cpp)
 ament_target_dependencies(pub_cluster rclcpp std_msgs )
-rosidl_target_interfaces(pub_cluster ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(pub_cluster "${cpp_typesupport_target}")
 
 add_executable(pub_array src/pub_array.cpp)
 ament_target_dependencies(pub_array rclcpp std_msgs )
-rosidl_target_interfaces(pub_array ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(pub_array "${cpp_typesupport_target}")
 
 add_executable(sub_array src/sub_array.cpp)
 ament_target_dependencies(sub_array rclcpp std_msgs )
-rosidl_target_interfaces(sub_array ${PROJECT_NAME} "rosidl_typesupport_cpp")
+target_link_libraries(sub_array "${cpp_typesupport_target}")
 
 
 #key in name here, for ro2 to find the executable
